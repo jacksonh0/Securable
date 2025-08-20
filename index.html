@@ -1,0 +1,470 @@
+// Website index.html - Written in HTML5 by @jacksonh0 on GitHub. //
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Securable — Sign in once, use it everywhere.</title>
+  <meta name="description" content="Securable is a universal login platform with OAuth 2.0 & OIDC. Ship auth in minutes with beautiful dashboards, SDKs, and privacy‑first security." />
+  <meta name="theme-color" content="#3e66ff" />
+  <meta property="og:title" content="Securable — Sign in once, use it everywhere." />
+  <meta property="og:description" content="Drop‑in OAuth 2.0 & OIDC, developer‑friendly SDKs, and a stunning dashboard. Start free." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          colors: {
+            bg: "#0b0c10",
+            panel: "#101218",
+            muted: "#171a22",
+            text: "#eaf0ff",
+            sub: "#a6b0cf",
+            brand: { 400: "#7aa2ff", 500: "#5c86ff", 600: "#3e66ff" },
+            accent: "#ff7ac6",
+            ok: "#22c55e",
+          },
+          boxShadow: {
+            glow: "0 10px 40px rgba(92,134,255,.4)",
+            card: "0 10px 28px rgba(0,0,0,.35)",
+            ring: "inset 0 0 0 1px rgba(255,255,255,.06)",
+          },
+          borderRadius: { cool: "1.25rem" },
+          backgroundImage: {
+            grid: "radial-gradient(transparent 1px, rgba(255,255,255,.04) 1px)",
+            hero: "radial-gradient(1200px 600px at 10% -10%, rgba(124, 58, 237, .25), transparent 60%), radial-gradient(900px 500px at 90% 0%, rgba(59, 130, 246, .2), transparent 60%), radial-gradient(700px 400px at 50% 120%, rgba(236, 72, 153, .15), transparent 60%)",
+          },
+          keyframes: {
+            floaty: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-6px)" } },
+            pulseBorder: { to: { boxShadow: "0 0 0 6px rgba(62,102,255,.0)" } },
+            shimmer: { to: { backgroundPosition: "200% center" } },
+          },
+          animation: {
+            floaty: "floaty 6s ease-in-out infinite",
+            pulseBorder: "pulseBorder 1.6s ease-out infinite",
+            shimmer: "shimmer 2s linear infinite",
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(255,255,255,0.04); }
+    .code-gradient { background: linear-gradient(90deg, #5c86ff, #ff7ac6, #5c86ff); background-size: 200% 100%; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body class="bg-bg text-text antialiased selection:bg-brand-600 selection:text-white">
+  <!-- Top Announce -->
+  <div class="hidden sm:block text-center text-xs py-2 bg-white/5 border-b border-white/5">Public Beta • Free up to <strong>5,000</strong> logins / month</div>
+
+  <!-- Nav -->
+  <header class="sticky top-0 z-50 w-full bg-bg/70 backdrop-blur border-b border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#" class="flex items-center gap-3" aria-label="Securable home">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600/20 text-brand-400 ring-1 ring-brand-600/30 shadow-glow">⚡</span>
+          <span class="text-lg font-extrabold tracking-tight">Securable</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-7 text-sm text-sub">
+          <a href="#features" class="hover:text-text">Features</a>
+          <a href="#how" class="hover:text-text">How it works</a>
+          <a href="#sdk" class="hover:text-text">SDKs</a>
+          <a href="#security" class="hover:text-text">Security</a>
+          <a href="#pricing" class="hover:text-text">Pricing</a>
+          <a href="#docs" class="hover:text-text">Docs</a>
+        </nav>
+        <div class="hidden md:flex items-center gap-3">
+          <a href="#signin" class="px-3 py-2 rounded-lg text-sub hover:text-text">Sign in</a>
+          <a href="#get-started" class="group relative px-4 py-2 rounded-lg bg-brand-600 text-white font-medium shadow-glow overflow-hidden">
+            <span class="absolute inset-0 code-gradient opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            <span class="relative">Get started</span>
+          </a>
+        </div>
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white/5" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/5 bg-bg/90">
+      <div class="mx-auto max-w-7xl px-4 py-4 flex flex-col gap-3 text-sub">
+        <a href="#features" class="hover:text-text">Features</a>
+        <a href="#how" class="hover:text-text">How it works</a>
+        <a href="#sdk" class="hover:text-text">SDKs</a>
+        <a href="#security" class="hover:text-text">Security</a>
+        <a href="#pricing" class="hover:text-text">Pricing</a>
+        <a href="#docs" class="hover:text-text">Docs</a>
+        <div class="pt-2 flex items-center gap-3">
+          <a href="#signin" class="px-3 py-2 rounded-lg text-sub hover:text-text">Sign in</a>
+          <a href="#get-started" class="px-4 py-2 rounded-lg bg-brand-600 text-white font-medium">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-hero">
+    <div class="absolute inset-0 pointer-events-none bg-[length:24px_24px] bg-grid" style="mask-image: radial-gradient(circle at center, black, transparent 70%)"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-24">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-6">
+          <span class="inline-flex items-center gap-2 rounded-full border border-brand-600/30 bg-brand-600/10 px-3 py-1 text-xs text-brand-400">New — OIDC ready</span>
+          <h1 class="mt-4 text-5xl font-extrabold leading-tight tracking-tight">Sign in once, <span class="text-brand-400">use it everywhere.</span></h1>
+          <p class="mt-4 text-lg text-sub max-w-prose">Securable is a universal login your users will love and developers will actually enjoy integrating. Privacy‑first, blazing fast, and beautifully simple.</p>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#get-started" class="relative px-5 py-3 rounded-xl bg-brand-600 text-white font-semibold shadow-glow hover:opacity-95">Get started free</a>
+            <a href="#docs" class="px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-text font-medium border border-white/10">Read the docs</a>
+            <span class="text-xs text-sub">No credit card • 5k logins/mo free</span>
+          </div>
+          <dl class="mt-8 grid grid-cols-3 gap-6 text-center">
+            <div class="rounded-xl bg-white/5 p-4 shadow-ring">
+              <dt class="text-xs text-sub">Median roundtrip</dt>
+              <dd class="text-xl font-bold">&lt; 250ms</dd>
+            </div>
+            <div class="rounded-xl bg-white/5 p-4 shadow-ring">
+              <dt class="text-xs text-sub">Uptime</dt>
+              <dd class="text-xl font-bold">99.95%</dd>
+            </div>
+            <div class="rounded-xl bg-white/5 p-4 shadow-ring">
+              <dt class="text-xs text-sub">SDKs</dt>
+              <dd class="text-xl font-bold">JS • React • PHP</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="lg:col-span-6">
+          <!-- Mocked auth card -->
+          <div class="relative glass shadow-card ring-1 ring-white/10 rounded-2xl p-6 animate-floaty">
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-sub">auth.securable.dev</div>
+              <span class="inline-flex items-center gap-2 text-xs text-sub"><span class="h-2 w-2 rounded-full bg-ok"></span> Live</span>
+            </div>
+            <div class="mt-4 rounded-xl bg-panel p-5 border border-white/10">
+              <h3 class="font-semibold">Authorize this app</h3>
+              <p class="mt-1 text-sm text-sub">"Acme Chat" is requesting access to your Securable account.</p>
+              <ul class="mt-3 text-sm text-sub list-disc pl-5 space-y-1">
+                <li>Read your profile (name & avatar)</li>
+                <li>Read your email address</li>
+                <li>OpenID Connect (openid, profile, email)</li>
+              </ul>
+              <div class="mt-5 grid grid-cols-2 gap-3">
+                <button class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10">Cancel</button>
+                <button class="px-4 py-2 rounded-lg bg-brand-600 text-white shadow-glow">Authorize</button>
+              </div>
+            </div>
+            <div class="mt-4 text-xs text-sub">Security: OAuth 2.0 • OIDC • JWT • Webhooks</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations / Logos -->
+  <section class="py-10 border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm text-sub">Works beautifully with modern stacks</p>
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 opacity-80">
+        <div class="flex items-center justify-center rounded-xl bg-panel py-4 ring-1 ring-white/5">React</div>
+        <div class="flex items-center justify-center rounded-xl bg-panel py-4 ring-1 ring-white/5">Next.js</div>
+        <div class="flex items-center justify-center rounded-xl bg-panel py-4 ring-1 ring-white/5">Laravel</div>
+        <div class="flex items-center justify-center rounded-xl bg-panel py-4 ring-1 ring-white/5">Vue</div>
+        <div class="flex items-center justify-center rounded-xl bg-panel py-4 ring-1 ring-white/5">Node</div>
+        <div class="flex items-center justify-center rounded-xl bg-panel py-4 ring-1 ring-white/5">PHP</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-extrabold">Everything you need to ship login fast</h2>
+        <p class="mt-3 text-sub">Drop‑in auth that scales from a side project to production. Securable handles the hard parts so you can ship in hours, not weeks.</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><div class="h-10 w-10 rounded-xl bg-brand-600/20 text-brand-400 flex items-center justify-center">🔐</div><h3 class="mt-4 font-semibold">OAuth 2.0 & OIDC</h3><p class="mt-2 text-sm text-sub">Authorization Code + PKCE, refresh tokens, short‑lived JWTs.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><div class="h-10 w-10 rounded-xl bg-brand-600/20 text-brand-400 flex items-center justify-center">🧩</div><h3 class="mt-4 font-semibold">SDKs you’ll actually use</h3><p class="mt-2 text-sm text-sub">First‑class SDKs for JS, React, Vue, Node, and PHP. Copy‑paste starters for Next.js & Laravel.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><div class="h-10 w-10 rounded-xl bg-brand-600/20 text-brand-400 flex items-center justify-center">🛡️</div><h3 class="mt-4 font-semibold">Privacy‑first</h3><p class="mt-2 text-sm text-sub">Minimal scopes by default, user‑controlled permissions and revocation, no ad tracking.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><div class="h-10 w-10 rounded-xl bg-brand-600/20 text-brand-400 flex items-center justify-center">⚡</div><h3 class="mt-4 font-semibold">Fast by default</h3><p class="mt-2 text-sm text-sub">Edge‑cached static + serverless APIs. Global POPs for low latency.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><div class="h-10 w-10 rounded-xl bg-brand-600/20 text-brand-400 flex items-center justify-center">🧰</div><h3 class="mt-4 font-semibold">Beautiful dashboards</h3><p class="mt-2 text-sm text-sub">Manage apps, API keys, redirects, and see live analytics in a clean UI.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><div class="h-10 w-10 rounded-xl bg-brand-600/20 text-brand-400 flex items-center justify-center">🤖</div><h3 class="mt-4 font-semibold">Bot protection ready</h3><p class="mt-2 text-sm text-sub">Optional CAPTCHA and rate limits. Bring your own or enable built‑in protection.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="py-20 border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl font-extrabold">Add Securable in minutes</h2>
+          <p class="mt-3 text-sub">Register your app, drop in a button, and handle the callback. That’s it. Minimal vanilla JS example below.</p>
+          <div class="mt-6 rounded-2xl bg-black/50 ring-1 ring-white/10 overflow-hidden">
+            <div class="flex items-center gap-2 px-4 py-2 border-b border-white/10 text-xs text-sub">
+              <button class="tabBtn px-2 py-1 rounded bg-white/10" data-snippet="js">JavaScript</button>
+              <button class="tabBtn px-2 py-1 rounded hover:bg-white/10" data-snippet="php">PHP</button>
+              <button class="tabBtn px-2 py-1 rounded hover:bg-white/10" data-snippet="next">Next.js</button>
+              <button id="copyBtn" class="ml-auto px-2 py-1 rounded bg-white/10 hover:bg-white/20">Copy</button>
+            </div>
+<pre class="p-4 overflow-auto text-sm"><code id="codeSlot" class="language-js">// 1) Add the button
+document.querySelector('#login').addEventListener('click', () => {
+  const params = new URLSearchParams({
+    client_id: 'YOUR_CLIENT_ID',
+    redirect_uri: 'https://yourapp.com/callback',
+    response_type: 'code',
+    scope: 'openid profile email',
+    state: crypto.randomUUID()
+  });
+  window.location.href = `https://auth.securable.click/oauth/authorize?${params}`;
+});
+
+// 2) Handle the callback on your backend (Authorization Code flow)
+// Exchange the code for tokens using your client_secret on the server.</code></pre>
+          </div>
+          <div class="mt-4 text-xs text-sub">More frameworks in the docs.</div>
+        </div>
+        <div>
+          <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card">
+            <ol class="space-y-5">
+              <li class="flex gap-4"><span class="h-8 w-8 flex-none rounded-lg bg-brand-600/20 text-brand-400 flex items-center justify-center font-bold">1</span><div><h3 class="font-semibold">Create an app</h3><p class="text-sm text-sub">Get a Client ID, Client Secret, and set redirect URLs.</p></div></li>
+              <li class="flex gap-4"><span class="h-8 w-8 flex-none rounded-lg bg-brand-600/20 text-brand-400 flex items-center justify-center font-bold">2</span><div><h3 class="font-semibold">Add the button</h3><p class="text-sm text-sub">Use our prebuilt UI or your own.</p></div></li>
+              <li class="flex gap-4"><span class="h-8 w-8 flex-none rounded-lg bg-brand-600/20 text-brand-400 flex items-center justify-center font-bold">3</span><div><h3 class="font-semibold">Handle the callback</h3><p class="text-sm text-sub">Exchange the code for tokens server‑side.</p></div></li>
+              <li class="flex gap-4"><span class="h-8 w-8 flex-none rounded-lg bg-brand-600/20 text-brand-400 flex items-center justify-center font-bold">4</span><div><h3 class="font-semibold">Ship</h3><p class="text-sm text-sub">Protect routes with JWT verification and go live.</p></div></li>
+            </ol>
+            <a href="#docs" class="mt-6 inline-flex items-center gap-2 text-brand-400">View quickstart →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SDK CTA -->
+  <section id="sdk" class="py-16 border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl bg-gradient-to-br from-brand-600/20 via-accent/10 to-transparent p-8 ring-1 ring-white/10 shadow-card">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h3 class="text-2xl font-extrabold">Copy‑paste SDKs & UI</h3>
+            <p class="mt-2 text-sub">Drop our <code class="px-1 rounded bg-white/10">&lt;SecurableButton/&gt;</code> into React or use tiny JS helpers. Themeable, accessible, and fast.</p>
+            <div class="mt-4 flex gap-3">
+              <a href="#docs" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10">Browse SDKs</a>
+              <a href="#get-started" class="px-4 py-2 rounded-xl bg-brand-600 text-white shadow-glow">Get API keys</a>
+            </div>
+          </div>
+          <div class="glass p-6 rounded-2xl ring-1 ring-white/10">
+<pre class="text-sm overflow-auto"><code>// React
+import { SecurableButton } from "@securable/react";
+
+export default function Login() {
+  return <SecurableButton clientId="..." redirectUri="/callback" scopes={["openid","profile","email"]}/>;
+}
+
+// PHP (Laravel)
+// routes/web.php
+Route::get('/login', [AuthController::class, 'redirect']);
+Route::get('/callback', [AuthController::class, 'callback']);
+</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section id="security" class="py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-extrabold">Security & privacy that scale</h2>
+        <p class="mt-3 text-sub">TLS everywhere, rotating refresh tokens, signed JWTs, and optional CAPTCHA. Minimal scopes by default.</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><h3 class="font-semibold">JWT & JWKs</h3><p class="mt-2 text-sm text-sub">RS256/ES256 signatures with public JWK discovery for verifiers.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><h3 class="font-semibold">Device & IP Controls</h3><p class="mt-2 text-sm text-sub">Per‑app rate limits and IP allow/deny lists.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><h3 class="font-semibold">Compliance‑ready</h3><p class="mt-2 text-sm text-sub">GDPR basics, export/delete requests, audit logs.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center">Loved by builders</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <figure class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card">
+          <blockquote class="text-sm text-sub">“Dropped Securable into our Next.js app in under an hour. The dashboard is actually nice to use.”</blockquote>
+          <figcaption class="mt-4 text-sm">— Alex, Indie Hacker</figcaption>
+        </figure>
+        <figure class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card">
+          <blockquote class="text-sm text-sub">“Finally an auth provider that doesn’t fight me. Clean tokens, clear docs, done.”</blockquote>
+          <figcaption class="mt-4 text-sm">— Priya, Full‑stack Dev</figcaption>
+        </figure>
+        <figure class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card">
+          <blockquote class="text-sm text-sub">“We switched from a DIY setup and cut auth bugs to basically zero.”</blockquote>
+          <figcaption class="mt-4 text-sm">— Marco, CTO</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-extrabold">Simple, predictable pricing</h2>
+        <p class="mt-3 text-sub">Start free. Upgrade when you’re ready. No dark patterns, no surprise overages.</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card flex flex-col">
+          <h3 class="text-xl font-semibold">Free</h3>
+          <p class="mt-1 text-sub text-sm">For hobbies and MVPs</p>
+          <div class="mt-4 text-4xl font-extrabold">$0<span class="text-lg font-medium text-sub">/mo</span></div>
+          <ul class="mt-4 text-sm text-sub space-y-2">
+            <li>5,000 logins / month</li>
+            <li>OIDC + OAuth 2.0</li>
+            <li>Basic dashboard</li>
+            <li>Email support</li>
+          </ul>
+          <a href="#get-started" class="mt-6 inline-flex justify-center px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10">Start free</a>
+        </div>
+        <div class="rounded-2xl bg-panel p-6 ring-2 ring-brand-600 shadow-glow flex flex-col">
+          <h3 class="text-xl font-semibold">Pro</h3>
+          <p class="mt-1 text-sub text-sm">For growing apps</p>
+          <div class="mt-4 text-4xl font-extrabold">$10<span class="text-lg font-medium text-sub">/mo</span></div>
+          <ul class="mt-4 text-sm text-sub space-y-2">
+            <li>50,000 logins / month</li>
+            <li>Advanced analytics</li>
+            <li>Custom domains</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#get-started" class="mt-6 inline-flex justify-center px-4 py-2 rounded-xl bg-brand-600 text-white">Go Pro</a>
+        </div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card flex flex-col">
+          <h3 class="text-xl font-semibold">Enterprise</h3>
+          <p class="mt-1 text-sub text-sm">For teams at scale</p>
+          <div class="mt-4 text-4xl font-extrabold">Custom</div>
+          <ul class="mt-4 text-sm text-sub space-y-2">
+            <li>SLA & uptime guarantees</li>
+            <li>SAML & SCIM (optional)</li>
+            <li>Dedicated support</li>
+            <li>Security reviews</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex justify-center px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10">Contact sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold">FAQ</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><h3 class="font-semibold">Is Securable an OAuth provider or a full identity platform?</h3><p class="mt-2 text-sm text-sub">Both. We host the authorization server, issue tokens, and give you dashboards, user management, and analytics.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><h3 class="font-semibold">Can I bring my own login UI?</h3><p class="mt-2 text-sm text-sub">Yes—use our hosted pages or embed your own and hit the authorize endpoint directly.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><h3 class="font-semibold">Microsoft‑only sign‑in?</h3><p class="mt-2 text-sm text-sub">Absolutely. Lock your tenant to Microsoft OAuth and hide other providers.</p></div>
+        <div class="rounded-2xl bg-panel p-6 ring-1 ring-white/10 shadow-card"><h3 class="font-semibold">How do you handle security?</h3><p class="mt-2 text-sm text-sub">TLS everywhere, short‑lived JWTs, rotating refresh tokens, and optional bot protection. Minimal scopes by default.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter / CTA -->
+  <section class="py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl glass ring-1 ring-white/10 p-8 text-center">
+        <h3 class="text-2xl font-extrabold">Build faster with Securable</h3>
+        <p class="mt-2 text-sub">Join the beta for updates, starter kits, and launch credits.</p>
+        <form class="mt-6 grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3" onsubmit="event.preventDefault()">
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" type="email" required placeholder="you@dev.com" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 placeholder:text-sub/70" />
+          <button class="px-5 py-3 rounded-xl bg-brand-600 text-white shadow-glow">Join beta</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid md:grid-cols-3 gap-6 items-center">
+        <p class="text-sm text-sub">© <span id="year"></span> Securable. All rights reserved.</p>
+        <nav class="flex items-center gap-6 justify-center text-sm text-sub">
+          <a href="#" class="hover:text-text">Status</a>
+          <a href="#" class="hover:text-text">Privacy</a>
+          <a href="#" class="hover:text-text">Terms</a>
+          <a href="#" class="hover:text-text">Security</a>
+        </nav>
+        <div class="flex justify-end gap-3">
+          <a href="#get-started" class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10">Get started</a>
+          <a href="#docs" class="px-4 py-2 rounded-lg bg-brand-600 text-white">Docs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // Code tabs
+    const snippets = {
+      js: `// 1) Add the button
+document.querySelector('#login').addEventListener('click', () => {
+  const params = new URLSearchParams({
+    client_id: 'YOUR_CLIENT_ID',
+    redirect_uri: 'https://yourapp.com/callback',
+    response_type: 'code',
+    scope: 'openid profile email',
+    state: crypto.randomUUID()
+  });
+  window.location.href = \`https://auth.securable.dev/oauth/authorize?\${params}\`;
+});
+
+// 2) Handle the callback on your backend (Authorization Code flow)
+// Exchange the code for tokens using your client_secret on the server.`,
+      php: `// Laravel example (routes/web.php)
+Route::get('/login', [AuthController::class, 'redirect']);
+Route::get('/callback', [AuthController::class, 'callback']);
+
+// Controller (simplified)
+public function redirect() {
+  $query = http_build_query([
+    'client_id' => env('SECURABLE_CLIENT_ID'),
+    'redirect_uri' => url('/callback'),
+    'response_type' => 'code',
+    'scope' => 'openid profile email',
+    'state' => Str::uuid(),
+  ]);
+  return redirect('https://auth.securable.dev/oauth/authorize?'.$query);
+}`,
+      next: `// Next.js API route /api/callback
+export default async function handler(req, res){
+  const { code } = req.query;
+  // exchange \`code\` for tokens with your client_secret server-side
+  // then set a session cookie
+  res.redirect('/');
+}`
+    };
+    const codeSlot = document.getElementById('codeSlot');
+    document.querySelectorAll('.tabBtn').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.tabBtn').forEach(x => x.classList.remove('bg-white/10'));
+      b.classList.add('bg-white/10');
+      codeSlot.textContent = snippets[b.dataset.snippet];
+    }));
+
+    // Copy code
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn?.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(codeSlot.textContent); copyBtn.textContent = 'Copied!'; setTimeout(()=>copyBtn.textContent='Copy', 2000); } catch(e) { copyBtn.textContent = 'Failed'; }
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
