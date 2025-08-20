@@ -1,0 +1,15 @@
+:root {
+  --ifm-color-primary: #5c86ff;
+  --ifm-color-primary-dark: #3e66ff;
+  --ifm-color-primary-darker: #365cf0;
+  --ifm-color-primary-darkest: #2746c7;
+  --ifm-navbar-background-color: #0b0c10;
+  --ifm-background-color: #0b0c10;
+}
+html[data-theme='dark'] {
+  --ifm-background-color: #0b0c10;
+  --ifm-navbar-background-color: #0b0c10;
+}
+.navbar, .footer--dark { background: #0b0c10; }
+.hero--primary { background: linear-gradient(135deg, rgba(62,102,255,0.2), rgba(255,122,198,0.15)); }
+code, pre { border-radius: 8px; }
